@@ -26,4 +26,32 @@ describe ::Movie do
   	expect(movie.thumbs_down).to eql(initial_rank-1)
   end
 
+  context 'with a default rank' do
+  	let(:movie) { ::Movie.new("godfather") }
+  	it "has a value of 0" do
+  		expect(movie.rank).to eql(0)
+  	end
+  end
+
+  context 'with a rank of 20 or more' do
+  	it "is a winner" do
+  		expect(movie.winner?).to eql(true)
+  	end
+
+  	it "has a winner status" do
+  		expect(movie.status).to eql("Winner!")
+  	end
+  end
+
+  context 'with a rank of less than 20' do
+  	let(:movie) { ::Movie.new("gravity", 19) }
+  	it "is a loser" do
+  		expect(movie.winner?).to eql(false)
+  	end
+
+  	it "has a loser status" do
+  		expect(movie.status).to eql("Loser!")
+  	end
+  end
+
 end
