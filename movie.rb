@@ -8,7 +8,7 @@ class	Movie
 	end
 
 	def to_s # meta programming
-		"#{@title} has a rank of #{@rank}"
+		"#{@title} has a rank of #{@rank} (#{status})"
 	end
 
 	def thumbs_up
