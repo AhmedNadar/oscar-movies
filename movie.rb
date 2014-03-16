@@ -18,6 +18,14 @@ class	Movie
 	def thumbs_down
 		@rank -= 1
 	end
+
+	def winner?
+		@rank >= 20
+	end
+
+	def status
+		winner? ? "Winner!" : "Loser!"
+	end
 end
 
 if __FILE__ == $0
