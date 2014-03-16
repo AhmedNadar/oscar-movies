@@ -15,7 +15,7 @@ describe ::Movie do
   end
 
   it "has a description" do
-  	expect(movie.to_s).to eql("Gravity has a rank of 20")
+  	expect(movie.to_s).to eql("Gravity has a rank of 20 (Winner!)")
   end
 
   it "GET #thumbs_up" do
