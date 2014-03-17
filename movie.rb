@@ -5,8 +5,18 @@ class	Movie
 	def initialize(title, rank=0)
 	  @title = title.capitalize
 	  @rank = rank
+	  @snack_carbs = Hash.new(0)
 	end
 
+	def carbs_consumed
+		@snack_carbs.values.reduce(0, :+)	
+	end
+
+	def ate_snack(snack)
+		@snack_carbs[snack.name] += snack.carbs
+		puts "#{@title} let to (#{snack.carbs}) #{snack.name} carbs being consumed"
+		puts "#{@title}'s snack: #{@snack_carbs}"
+	end
 	def thumbs_up
 		@rank += 1	
 	end
