@@ -1,3 +1,5 @@
+require_relative "snack_bar"
+
 class	Movie	
 	attr_reader :title
 	attr_accessor :rank
@@ -6,6 +8,13 @@ class	Movie
 	  @title = title.capitalize
 	  @rank = rank
 	  @snack_carbs = Hash.new(0)
+	end
+
+	def each_snack
+		@snack_carbs.each do |name, carbs|
+			snack = Snack.new(name, carbs)
+			yield snack
+		end
 	end
 
 	def carbs_consumed
