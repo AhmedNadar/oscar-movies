@@ -1,8 +1,10 @@
 require_relative "snack_bar"
+require_relative "rankable"
 
 class	Movie	
-	attr_reader :title
-	attr_accessor :rank
+	include Rankable
+
+	attr_accessor :title, :rank
 
 	def initialize(title, rank=0)
 	  @title = title.capitalize
@@ -34,25 +36,6 @@ class	Movie
 		@snack_carbs[snack.name] += snack.carbs
 		puts "#{@title} let to (#{snack.carbs}) #{snack.name} carbs being consumed"
 		puts "#{@title}'s snack: #{@snack_carbs}"
-	end
-	def thumbs_up
-		@rank += 1	
-	end
-
-	def thumbs_down
-		@rank -= 1
-	end
-
-	def winner?
-		@rank >= 20
-	end
-
-	def status
-		winner? ? "Winner!" : "Loser!"
-	end
-
-	def <=>(other_movie)
-		other_movie.rank <=> @rank
 	end
 
 	def to_s # meta programming
