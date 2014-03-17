@@ -4,17 +4,22 @@ require_relative "playlist"
 	movie2 = Movie.new("wall street", 3)
 	movie3 = Movie.new("frozen", 16)
 
-	playlist1 = Playlist.new("Oscar")
-	playlist1.add_movie(movie1)
-	playlist1.add_movie(movie2)
-	playlist1.add_movie(movie3)
-	playlist1.play(3)
-	playlist1.print_stats
+	playlist = Playlist.new("Oscar")
+	# stor command line argument in ARGF
+	playlist.load(ARGV.shift || "movies.csv")
 
-	# playlist2 = Playlist.new("Kermit")
-	# playlist2.add_movie(movie3)
-
-	# movie4 = Movie.new("12 years", 18)
-	# playlist2.add_movie(movie4)
-	# playlist2.play(3)
-	# playlist2.print_stats
+loop do
+	puts "\nHow many viewings you want to see? ('quit' to exit)"
+	answer = gets.chomp.downcase
+	case answer
+	when /^\d+$/
+		playlist.play(answer.to_i)
+	when 'quit', 'exit'
+		playlist.print_stats
+		break
+	else
+		puts "Please enter a number or 'quit'"
+	end
+end
+playlist.save
+	
