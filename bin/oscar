@@ -1,16 +1,11 @@
-require_relative "playlist"
-require_relative "movie3d"
+#!/usr/bin/env ruby
 
-	movie1 = Movie.new("gravity", 20)
-	movie2 = Movie.new("wall street", 3)
-	movie3 = Movie.new("frozen", 16)
+require_relative "../lib/oscar/playlist"
 
-	playlist = Playlist.new("Oscar")
+	playlist = Oscar::Playlist.new("Kermit")
 	# stor command line argument in ARGF
-	playlist.load(ARGV.shift || "movies.csv")
-
-	movie3d = Movie3D.new("dianasors", 5, 20)
-	playlist.add_movie(movie3d)
+	default_movie_file = File.join(File.dirname(__FILE__), 'movies.csv')
+	playlist.load(ARGV.shift || default_movie_file)
 
 loop do
 	puts "\nHow many viewings you want to see? ('quit' to exit)"
