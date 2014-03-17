@@ -87,4 +87,14 @@ describe ::Movie do
     end
     expect(yielded).to eql([Snack.new(:popcorn, 20), Snack.new(:juice, 5)])
   end
+
+  it "can be instantiated from a CSV file" do
+    movie = Movie.from_csv("gravity,10")
+    expect(movie.title).to eql("Gravity")
+    expect(movie.rank).to eql(10)
+  end
+
+  it "can be serialized to a CSV file" do
+    expect(movie.to_csv).to eql("Gravity, 20")
+  end
 end
