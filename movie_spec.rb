@@ -54,4 +54,37 @@ describe ::Movie do
   	end
   end
 
+  it "is sorted by decreasing rank" do
+    movie1 = Movie.new("gravity", 100)
+    movie2 = Movie.new("madacascar", 200)
+    movie3 = Movie.new("godfather", 300)
+
+    movies = [movie1, movie2, movie3]
+    expect(movies.sort).to eql([movie3, movie2, movie1])
+  end
+
+  it "computes carbs consumed as the sum of all snack carbs consumed" do
+    expect(movie.carbs_consumed).to eql(0)
+    
+    movie.ate_snack(Snack.new(:popcorn, 10))
+    expect(movie.carbs_consumed).to eql(10)
+    
+    movie.ate_snack(Snack.new(:popcorn, 10))
+    expect(movie.carbs_consumed).to eql(20)
+
+    movie.ate_snack(Snack.new(:juice, 5))
+    expect(movie.carbs_consumed).to eql(25)
+  end
+
+  it "yields each snack" do
+    movie.ate_snack(Snack.new(:popcorn, 10))
+    movie.ate_snack(Snack.new(:popcorn, 10))
+    movie.ate_snack(Snack.new(:juice, 5))
+
+    yielded = []
+    movie.each_snack do |snack|
+      yielded << snack
+    end
+    expect(yielded).to eql([Snack.new(:popcorn, 20), Snack.new(:juice, 5)])
+  end
 end
