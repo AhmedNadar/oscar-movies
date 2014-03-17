@@ -7,10 +7,6 @@ class	Movie
 	  @rank = rank
 	end
 
-	def to_s # meta programming
-		"#{@title} has a rank of #{@rank} (#{status})"
-	end
-
 	def thumbs_up
 		@rank += 1	
 	end
@@ -25,6 +21,14 @@ class	Movie
 
 	def status
 		winner? ? "Winner!" : "Loser!"
+	end
+
+	def <=>(other_movie)
+		other_movie.rank <=> @rank
+	end
+
+	def to_s # meta programming
+		"#{@title} has a rank of #{@rank} (#{status})"
 	end
 end
 
