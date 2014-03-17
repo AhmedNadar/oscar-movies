@@ -1,5 +1,5 @@
 Gem::Specification.new do |s| 
-  s.name         = "oscar"
+  s.name         = "oscar-movies"
   s.version      = "1.0.0"
   s.author       = "Ahmed Nadar"
   s.email        = "ahmednadar@gmail.com"
