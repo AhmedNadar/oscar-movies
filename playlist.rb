@@ -45,13 +45,7 @@ class Playlist
 
 	def print_stats
 		puts "\n#{@name}'s Stats:"
-
-		puts "#{total_carbs_consumed} total carbs consumed"
-
-		@movies.sort.each	do |movie|
-			puts "\n#{movie.title}'s snack totals:"
-			puts "#{movie.carbs_consumed} grand total carbs."
-		end
+		
 		winners, losers = @movies.partition { |movie| movie.winner? }
 
 		puts "\nWinners:"
@@ -59,5 +53,14 @@ class Playlist
 
 		puts	"\nLosers:"
 		puts losers.sort
+		
+		puts "#{total_carbs_consumed} total carbs consumed"
+		@movies.sort.each	do |movie|
+			puts "\n#{movie.title}'s snack totals:"
+			movie.each_snack do |snack|
+				puts "#{snack.carbs} totla #{snack.name.capitalize}"
+			end
+			puts "#{movie.carbs_consumed} grand total carbs."
+		end
 	end
 end
