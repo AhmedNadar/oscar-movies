@@ -1,6 +1,9 @@
 require_relative "movie"
+require_relative "reviewer"
 
 class Playlist
+	attr_reader :name
+
 	def initialize(name)
 	  @name = name
 	  @movies = [ ]
@@ -9,26 +12,27 @@ class Playlist
 	def add_movie(movie)
 		@movies << movie
 	end
-	def roll_die
-		rand(1..20)
+
+	def play(viewings)
+		puts "\n*** #{@name}'s playlist:"
+		puts	@movies.sort
+		1.upto(viewings) do |count|
+			puts "\nViewing #{count}:"
+			@movies.each do |movie|
+				Reviewer.review(movie)
+				puts movie
+			end
+		end
 	end
 
-	def play
-		puts "\n*** #{@name}'s playlist:"
-		puts	@movies
+	def print_stats
+		puts "\n#{@name}'s Stats:"
+		winners, losers = @movies.partition { |movie| movie.winner? }
 
-		@movies.each do |m|
-			number_rolled = roll_die
-			if number_rolled < 6				
-				m.thumbs_down
-				puts "#{m.title} got a thumbs down."
-			elsif number_rolled < 11
-				puts "#{m.title} was skipped."
-			else
-				m.thumbs_up
-				puts "#{m.title} got a thumbs up."
-			end
-			puts m
-		end
+		puts "\nWinners:"
+		puts winners.sort
+
+		puts	"\nLosers:"
+		puts losers.sort
 	end
 end
